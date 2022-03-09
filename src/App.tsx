@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import logo from './logo.svg';
 import styles from './App.module.css';
-import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Redirect, HashRouter} from 'react-router-dom';
 import { HomePage, Register, SignIn ,Detail, Search, ShoppingCart, PlaceOrder} from './pages';
 import { useSelector } from './redux/hooks';
 import { useDispatch } from 'react-redux';
@@ -24,7 +24,7 @@ function App() {
   },[jwt])
   return (
     <div className={styles.App}>
-     <BrowserRouter>
+     <HashRouter>
      <Switch>
       <Route path='/' exact component={HomePage}/>
       <Route path='/signin' exact component={SignIn}/>
@@ -40,7 +40,7 @@ function App() {
       <Route render={()=><h1>404 not found</h1>}></Route>
      
       </Switch>
-     </BrowserRouter>
+     </HashRouter>
     </div>
 
   );
