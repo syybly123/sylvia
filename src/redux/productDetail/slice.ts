@@ -7,7 +7,7 @@ interface ProductDetailState {
 }
 
 const initialState: ProductDetailState = {
-    loading: true,
+    loading: false,
     error: null,
     data: null
 

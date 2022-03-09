@@ -2,7 +2,7 @@ import React,{ useState, useEffect} from 'react';
 import { RouteComponentProps, useParams}  from 'react-router-dom';
 import { Row, Col, Typography, Spin, DatePicker, Divider, Anchor, Menu, Button } from "antd";
 import styles from "./Detail.module.css";
-import { commentMockData } from './mockup';
+import { commentMockData, productDetail } from './mockup';
 import { ProductDetailSlice , getProductDetail} from '../../redux/productDetail/slice';
 import { useSelector } from '../../redux/hooks';
 import {
@@ -29,14 +29,14 @@ export const Detail : React.FC<RouteComponentProps<MatchParams>> = (props)=> {
     //const [error, setError] = useState<string | null>(null);
     const loading = useSelector(state=> state.productDetail.loading);
     const error = useSelector(state=> state.productDetail.error);
-    const product = useSelector(state=> state.productDetail.data);
-
+    //const product = useSelector(state=> state.productDetail.data);
+    const product = productDetail
     const dispatch = useDispatch();
     const jwt = useSelector(state=> state.user.token) as string;
     const shoppingCartloading = useSelector(state =>state.shoppingCart.loading)
-    useEffect(()=> {
-        dispatch(getProductDetail(touristRouteId));
-    },[])
+    // useEffect(()=> {
+    //     dispatch(getProductDetail(touristRouteId));
+    // },[])
 
     if( loading) {
         return (
@@ -66,8 +66,7 @@ export const Detail : React.FC<RouteComponentProps<MatchParams>> = (props)=> {
                             title={product.title}
                             description={product.description}
                             price={product.originalPrice}
-                            coupons={product.conpons}
-                            points={product.points}
+                            coupons={product.discountPresent}
                             discount={product.price}
                             rating={product.rating}
                             pictures={product.touristRoutePictures.map(p=> p.url)}
@@ -85,7 +84,7 @@ export const Detail : React.FC<RouteComponentProps<MatchParams>> = (props)=> {
                           </Col>
                     </Row>
                      </div>
-                <Anchor className={styles["product-detail-anchor"]}>
+                {/* <Anchor className={styles["product-detail-anchor"]}>
                   <Menu mode="horizontal">
                     <MenuItem key="1"></MenuItem>
                     <Anchor.Link 
@@ -95,16 +94,13 @@ export const Detail : React.FC<RouteComponentProps<MatchParams>> = (props)=> {
                     <Anchor.Link 
                       href='#fees' title="Product Fees"
                     ></Anchor.Link>
+                
                     <MenuItem key="3"></MenuItem>
-                    <Anchor.Link 
-                      href='#notes' title="Product Notes"
-                    ></Anchor.Link>
-                    <MenuItem key="4"></MenuItem>
                     <Anchor.Link 
                       href='#comments' title="User Comments"
                     ></Anchor.Link>
                   </Menu>
-                </Anchor>
+                </Anchor> */}
                 <div id="feature" className={styles["product-detail-container"]}>
                   <Divider orientation="center">
                     <Typography.Title level={3}>Product Features</Typography.Title>
@@ -121,14 +117,7 @@ export const Detail : React.FC<RouteComponentProps<MatchParams>> = (props)=> {
                   style={{margin:50}}
                   ></div>
                 </div>
-                <div id="notes" className={styles["product-detail-container"]}>
-                <Divider orientation="center">
-                    <Typography.Title level={3}>Product Notes</Typography.Title>
-                  </Divider>
-                  <div dangerouslySetInnerHTML={{__html:product.notes}}
-                  style={{margin:50}}
-                  ></div>
-                </div>
+                
                 <div id="comments" className={styles["product-detail-container"]}>
                 <Divider orientation="center">
                     <Typography.Title level={3}>User Comments</Typography.Title>

@@ -6,9 +6,8 @@ interface PropTypes{
     title: string,
     description: string,
     price: string | number,
-    coupons: string,
-    points:string,
-    discount: string,
+    coupons: number | null,
+    discount: number,
     rating: string | number,
     pictures: string[]
 }
@@ -38,7 +37,6 @@ export const ProductIntro : React.FC<PropTypes>=({
     description,
     price,
     coupons,
-    points,
     discount,
     rating,
     pictures
@@ -46,12 +44,12 @@ export const ProductIntro : React.FC<PropTypes>=({
     const tableDataSource: RowType[] = [
         {
           key: 0,
-          title: "路线名称",
+          title: "Route Name",
           description: title,
         },
         {
           key: 1,
-          title: "价格",
+          title: "Price",
           description: (
             <>
               ¥{" "}
@@ -63,7 +61,7 @@ export const ProductIntro : React.FC<PropTypes>=({
         },
         {
           key: 2,
-          title: "限时抢购折扣",
+          title: "Limited Discount",
           description: discount ? (
             <>
               ¥ <Typography.Text delete>{price}</Typography.Text>{" "}
@@ -72,22 +70,22 @@ export const ProductIntro : React.FC<PropTypes>=({
               </Typography.Text>
             </>
           ) : (
-            "暂无折扣"
+            "No Discount"
           ),
         },
         {
           key: 2,
-          title: "领取优惠",
-          description: coupons ? discount : "无优惠券可领",
+          title: "Coupon",
+          description: coupons ? discount : "No Coupon",
         },
         {
           key: 2,
-          title: "线路评价",
+          title: "Route Reviews",
           description: (
             <>
               <Rate allowHalf defaultValue={+rating} />
               <Typography.Text style={{ marginLeft: 10 }}>
-                {rating} 星
+                {rating} Star
               </Typography.Text>
             </>
           ),
